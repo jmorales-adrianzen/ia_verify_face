@@ -1,0 +1,35 @@
+# Entornos virtuales de Python
+.venv/
+venv/
+env/
+
+# Cache de Python
+__pycache__/
+*.py[cod]
+
+# Entorno de Azure Functions (si usas __python__)
+__python__/
+
+# Archivos específicos de Python
+*.pyc
+*.pyo
+*.pyd
+*.py.class
+
+# Archivos de configuración local
+local.settings.json
+
+# Directorio de modelos de DeepFace
+.deepface/
+
+# Editor/IDE
+.vscode/
+.idea/
+
+# Azure Functions
+bin/
+obj/
+*.user
+*.suo
+*.pubxml
+*.publishsettings
