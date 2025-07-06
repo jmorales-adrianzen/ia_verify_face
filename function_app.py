@@ -10,25 +10,9 @@ import logging
 # Configura logging
 logging.basicConfig(level=logging.INFO)
 
-app = func.FunctionApp(http_auth_level=func.AuthLevel.FUNCTION)
+app = func.FunctionApp(http_auth_level=func.AuthLevel.ANONYMOUS)
 
-def base64_to_image(base64_str: str) -> np.ndarray:
-    """Convierte Base64 a array numpy para DeepFace"""
-    try:
-        # Elimina el prefijo si existe (ej: "data:image/jpeg;base64,")
-        if "," in base64_str:
-            base64_str = base64_str.split(",")[1]
-        
-        img_bytes = base64.b64decode(base64_str)
-        img = Image.open(BytesIO(img_bytes))
-        return np.array(img.convert("RGB"))
-    
-    except Exception as e:
-        logging.error(f"Error decodificando Base64: {str(e)}")
-        raise ValueError(f"Formato de imagen inválido: {str(e)}")
-
-
-@app.route(route="compare-faces", methods=["POST"], auth_level=func.AuthLevel.FUNCTION)
+@app.route(route="compare-faces", methods=["POST"], auth_level=func.AuthLevel.ANONYMOUS)
 def compare_faces(req: func.HttpRequest) -> func.HttpResponse:
     """Endpoint para comparar rostros usando DeepFace"""
     try:
@@ -105,3 +89,18 @@ def compare_faces(req: func.HttpRequest) -> func.HttpResponse:
             status_code=500,
             mimetype="application/json"
         )
+        
+def base64_to_image(base64_str: str) -> np.ndarray:
+    """Convierte Base64 a array numpy para DeepFace"""
+    try:
+        # Elimina el prefijo si existe (ej: "data:image/jpeg;base64,")
+        if "," in base64_str:
+            base64_str = base64_str.split(",")[1]
+        
+        img_bytes = base64.b64decode(base64_str)
+        img = Image.open(BytesIO(img_bytes))
+        return np.array(img.convert("RGB"))
+    
+    except Exception as e:
+        logging.error(f"Error decodificando Base64: {str(e)}")
+        raise ValueError(f"Formato de imagen inválido: {str(e)}")        
