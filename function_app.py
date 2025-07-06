@@ -10,8 +10,9 @@ import logging
 # Configura logging
 logging.basicConfig(level=logging.INFO)
 
-app = func.FunctionApp(http_auth_level=func.AuthLevel.ANONYMOUS)
+app = func.FunctionApp()
 
+@app.function_name(name="fn-verify-face")
 @app.route(route="compare-faces", methods=["POST"], auth_level=func.AuthLevel.ANONYMOUS)
 def compare_faces(req: func.HttpRequest) -> func.HttpResponse:
     """Endpoint para comparar rostros usando DeepFace"""
