@@ -1,7 +1,6 @@
 azure-functions==1.23.0
 tensorflow==2.19.0
 deepface==0.0.88
-numpy<2.2.0,>=1.26.0
 tf_keras==2.19.0
 pillow==11.3.0
 langchain<1.0.0,>=0.3.25
