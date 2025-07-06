@@ -79,7 +79,7 @@ jobs:
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_460FF4F75F0049AA88FAEA66428B27D5 }}
 
       - name: 'Deploy to Azure Functions'
-        uses: Azure/functions-action@v1
+        uses: Azure/functions-action@v2
         id: deploy-to-function
         with:
           app-name: 'fn-verify-face'
